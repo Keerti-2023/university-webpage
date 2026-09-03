@@ -9,11 +9,17 @@ app.use(cors());
 app.use(json());
 app.use(urlencoded({ extended: true }));
 
+// ================= DATABASE =================
+
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "root",
-    database: "ab"
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
 
 db.connect((err) => {
@@ -21,20 +27,25 @@ db.connect((err) => {
         console.log("Database connection failed:", err);
         return;
     }
+
     console.log("MySQL Connected");
 });
 
 // ================= REGISTER =================
 
 app.post("/register", async (req, res) => {
+
     const { name, email, password } = req.body;
 
     try {
+
         const hashedPassword = await hash(password, 10);
 
-        const sql = "INSERT INTO users(name,email,password) VALUES(?,?,?)";
+        const sql =
+            "INSERT INTO users(name,email,password) VALUES(?,?,?)";
 
         db.query(sql, [name, email, hashedPassword], (err) => {
+
             if (err) {
                 return res.status(500).json({
                     success: false,
@@ -46,13 +57,16 @@ app.post("/register", async (req, res) => {
                 success: true,
                 message: "User registered successfully"
             });
+
         });
 
     } catch (error) {
+
         res.status(500).json({
             success: false,
             message: error.message
         });
+
     }
 });
 
@@ -120,7 +134,10 @@ app.post("/login", (req, res) => {
 
 });
 
+// ================= SERVER =================
 
-app.listen(3000, "127.0.0.1", () => {
-    console.log("Server running on http://127.0.0.1:3000");
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server running on port ${PORT}`);
 });
