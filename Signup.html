@@ -66,7 +66,7 @@
             };
 
             console.log(data);
-fetch("http://localhost:3000/register", {
+fetch("https://university-webpage-hav3.onrender.com/register",  {
     method: "POST",
     headers: {
         "Content-Type": "application/json"
@@ -79,7 +79,7 @@ fetch("http://localhost:3000/register", {
     if (result.success) {
 
        alert("Registration Successful!");
-        window.location.href = "/university-webpage/Login.html";
+        window.location.href = "/Login.html";
 
     } else {
 
