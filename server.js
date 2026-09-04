@@ -11,7 +11,7 @@ app.use(urlencoded({ extended: true }));
 
 // ================= DATABASE =================
 
-const db = mysql.createConnection({
+const db = mysql.createPool({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     user: process.env.DB_USER,
@@ -19,16 +19,21 @@ const db = mysql.createConnection({
     database: process.env.DB_NAME,
     ssl: {
         rejectUnauthorized: false
-    }
+    },
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
-db.connect((err) => {
+db.getConnection((err, connection) => {
     if (err) {
         console.log("Database connection failed:", err);
         return;
     }
 
     console.log("MySQL Connected");
+
+    connection.release();
 });
 
 // ================= REGISTER =================
