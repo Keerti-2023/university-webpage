@@ -33,7 +33,7 @@ const Navbar = () => {
 
     alert("Logged out successfully!");
 
-    window.location.href = "/university-webpage/Login.html";
+window.location.href = "/Login.html";
     
   };
 
@@ -93,13 +93,13 @@ const Navbar = () => {
         ) : (
           <>
             <li>
-              <a href="/university-webpage/Signup.html">
+              <a href="/Signup.html">
                 <button className="btn">Sign Up</button>
               </a>
             </li>
 
             <li>
-             <a href="/university-webpage/Login.html">
+             <a href="/Login.html">
                 <button className="btn">Login</button>
               </a>
             </li>
