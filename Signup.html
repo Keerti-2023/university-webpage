@@ -76,16 +76,16 @@ fetch("https://university-webpage-hav3.onrender.com/register",  {
 .then(response => response.json())
 .then(result => {
 
-    if (result.success) {
+   if (result.success) {
 
-       alert("Registration Successful!");
-        window.location.href = "/Login.html";
+    alert("Registration Successful!");
+    window.location.href = "Login.html";
 
-    } else {
+} else {
 
-        alert(result.message);
+    alert(result.message);
 
-    }
+}
 
 })
 .catch(error => {
