@@ -7,9 +7,6 @@ const Navbar = () => {
   const [bg, setBg] = useState(false);
   const [username, setUsername] = useState("");
 
-  // GitHub Pages base path
-  const baseUrl = import.meta.env.BASE_URL;
-
   useEffect(() => {
     const handleScroll = () => {
       setBg(window.scrollY > 500);
@@ -34,18 +31,21 @@ const Navbar = () => {
 
     alert("Logged out successfully!");
 
-    window.location.href = `${baseUrl}Login.html`;
+    window.location.href =
+      "https://keerti-2023.github.io/university-webpage/Login.html";
   };
 
   return (
     <nav className={`container ${bg ? "darknav" : ""}`}>
 
-      {/* Logo */}
-      <img src={logo} alt="University Logo" className="logo" />
+      <img
+        src={logo}
+        alt="University Logo"
+        className="logo"
+      />
 
       <ul>
 
-        {/* Home */}
         <li>
           <Link
             to="hero"
@@ -57,7 +57,6 @@ const Navbar = () => {
           </Link>
         </li>
 
-        {/* Programs */}
         <li>
           <Link
             to="programs"
@@ -69,7 +68,6 @@ const Navbar = () => {
           </Link>
         </li>
 
-        {/* About */}
         <li>
           <Link
             to="about"
@@ -81,7 +79,6 @@ const Navbar = () => {
           </Link>
         </li>
 
-        {/* Gallery */}
         <li>
           <Link
             to="gallery"
@@ -93,7 +90,6 @@ const Navbar = () => {
           </Link>
         </li>
 
-        {/* Testimony */}
         <li>
           <Link
             to="testimony"
@@ -105,7 +101,6 @@ const Navbar = () => {
           </Link>
         </li>
 
-        {/* Contact */}
         <li>
           <Link
             to="contact"
@@ -117,7 +112,6 @@ const Navbar = () => {
           </Link>
         </li>
 
-        {/* Logged In */}
         {username ? (
           <>
             <li className="welcome-text">
@@ -134,10 +128,9 @@ const Navbar = () => {
             </li>
           </>
         ) : (
-          /* Not Logged In */
           <>
             <li>
-              <a href={`${baseUrl}Signup.html`}>
+              <a href="https://keerti-2023.github.io/university-webpage/Signup.html">
                 <button className="btn">
                   Sign Up
                 </button>
@@ -145,7 +138,7 @@ const Navbar = () => {
             </li>
 
             <li>
-              <a href={`${baseUrl}Login.html`}>
+              <a href="https://keerti-2023.github.io/university-webpage/Login.html">
                 <button className="btn">
                   Login
                 </button>
