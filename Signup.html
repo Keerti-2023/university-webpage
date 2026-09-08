@@ -4,60 +4,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
-    <link rel="stylesheet" href="Login.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css" />
+    <title>Signup Form</title>
+
+    <link rel="stylesheet" href="./Login.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css">
 </head>
 
 <body style="background-image: url('./s.jpg');">
 
+    <div class="login">
 
-    <div class='login'>
-        <h2>Signup </h2>
+        <h2>Signup</h2>
+
         <form id="registerForm">
 
             <div class="form-group">
-                <input type='text' id="name" required>
+                <input type="text" id="name" required>
                 <i class="fa-solid fa-user"></i>
-                <label for="">Name</label>
-
+                <label>Name</label>
             </div>
 
             <div class="form-group">
-                <input type='email' id="email" required>
+                <input type="email" id="email" required>
                 <i class="fa-solid fa-envelope"></i>
-                <label for="">Email</label>
-
+                <label>Email</label>
             </div>
 
             <div class="form-group">
-
-
-                <input type='password' id="password" required>
-                <label for="">Password</label>
+                <input type="password" id="password" required>
                 <i class="fa-solid fa-key"></i>
-
+                <label>Password</label>
             </div>
 
-            <button type='submit' value="submit" class='btn'>Submit</button>
-            <p style="text-align:center;  margin-top: 10px; font-size: 15px; ">Already have an account ? <a
-                    href="Login.html" style="text-decoration: none; font-weight: 500; color: blue;"> Login</a> </p>
+            <button type="submit" class="btn">
+                Submit
+            </button>
 
+            <p style="text-align:center; margin-top:10px; font-size:15px;">
+                Already have an account?
+                <a href="./Login.html"
+                   style="text-decoration:none; font-weight:500; color:blue;">
+                    Login
+                </a>
+            </p>
 
         </form>
 
-
-
-
-
     </div>
+
     <script>
-        console.log("script loaded");
 
-        document.getElementById("registerForm").addEventListener("submit", function (e) {
+        console.log("Signup script loaded");
+
+        document.getElementById("registerForm").addEventListener("submit", async function (e) {
+
             e.preventDefault();
-
-            console.log("button clicked");
 
             const data = {
                 name: document.getElementById("name").value,
@@ -65,37 +67,49 @@
                 password: document.getElementById("password").value
             };
 
-            console.log(data);
-fetch("https://university-webpage-hav3.onrender.com/register",  {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
-})
-.then(response => response.json())
-.then(result => {
+            console.log("Sending registration request...");
 
-   if (result.success) {
+            try {
 
-    alert("Registration Successful!");
-    window.location.href = "Login.html";
+                const response = await fetch(
+                    "https://university-webpage-hav3.onrender.com/register",
+                    {
+                        method: "POST",
 
-} else {
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
 
-    alert(result.message);
+                        body: JSON.stringify(data)
+                    }
+                );
 
-}
+                const result = await response.json();
 
-})
-.catch(error => {
-    console.log(error);
-    alert("Server error");
-});
+                if (result.success) {
+
+                    alert("Registration Successful!");
+
+                    // GitHub Pages compatible path
+                    window.location.href = "./Login.html";
+
+                } else {
+
+                    alert("❌ " + result.message);
+
+                }
+
+            } catch (error) {
+
+                console.error("Registration error:", error);
+
+                alert("❌ Server error. Please try again.");
+
+            }
+
         });
+
     </script>
-
-
 
 </body>
 
