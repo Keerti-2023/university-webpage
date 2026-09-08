@@ -15,7 +15,6 @@ const Navbar = () => {
 
     window.addEventListener("scroll", handleScroll);
 
-    // Check if user is logged in
     const name = localStorage.getItem("username");
 
     if (name) {
@@ -33,8 +32,7 @@ const Navbar = () => {
 
     alert("Logged out successfully!");
 
-    // Relative path works on GitHub Pages
-    window.location.href = "./Login.html";
+    window.location.href = `${import.meta.env.BASE_URL}Login.html`;
   };
 
   return (
@@ -45,67 +43,37 @@ const Navbar = () => {
       <ul>
 
         <li>
-          <Link
-            to="hero"
-            smooth={true}
-            offset={0}
-            duration={500}
-          >
+          <Link to="hero" smooth={true} offset={0} duration={500}>
             Home
           </Link>
         </li>
 
         <li>
-          <Link
-            to="programs"
-            smooth={true}
-            offset={-280}
-            duration={500}
-          >
+          <Link to="programs" smooth={true} offset={-280} duration={500}>
             Programs
           </Link>
         </li>
 
         <li>
-          <Link
-            to="about"
-            smooth={true}
-            offset={-160}
-            duration={500}
-          >
+          <Link to="about" smooth={true} offset={-160} duration={500}>
             About
           </Link>
         </li>
 
         <li>
-          <Link
-            to="gallery"
-            smooth={true}
-            offset={-290}
-            duration={500}
-          >
+          <Link to="gallery" smooth={true} offset={-290} duration={500}>
             Gallery
           </Link>
         </li>
 
         <li>
-          <Link
-            to="testimony"
-            smooth={true}
-            offset={-290}
-            duration={500}
-          >
+          <Link to="testimony" smooth={true} offset={-290} duration={500}>
             Testimony
           </Link>
         </li>
 
         <li>
-          <Link
-            to="contact"
-            smooth={true}
-            offset={-250}
-            duration={500}
-          >
+          <Link to="contact" smooth={true} offset={-250} duration={500}>
             Contact
           </Link>
         </li>
@@ -128,7 +96,7 @@ const Navbar = () => {
         ) : (
           <>
             <li>
-              <a href="./Signup.html">
+              <a href={`${import.meta.env.BASE_URL}Signup.html`}>
                 <button className="btn">
                   Sign Up
                 </button>
@@ -136,7 +104,7 @@ const Navbar = () => {
             </li>
 
             <li>
-              <a href="./Login.html">
+              <a href={`${import.meta.env.BASE_URL}Login.html`}>
                 <button className="btn">
                   Login
                 </button>
